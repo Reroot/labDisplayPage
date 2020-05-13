@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import { LabView, LabViewProps, LabReativeInfo } from './LabView';
-//import Calculator from "./CalcComponent/Calculator";
+import Calculator from "./Calculator";
 
 export class Overview implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
@@ -43,7 +43,8 @@ export class Overview implements ComponentFramework.StandardControl<IInputs, IOu
 	 */
 	public updateView(context: ComponentFramework.Context<IInputs>): void {
 
-		this.labViewPropsPass.context = context;		
+		this.labViewPropsPass.context = context;			
+		
 		ReactDOM.render(
 			React.createElement(
 				LabView,
@@ -54,7 +55,9 @@ export class Overview implements ComponentFramework.StandardControl<IInputs, IOu
 	}
 
 	public getOutputs(): IOutputs {
-		return {};
+		return {
+
+		};
 	}
 
 

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
+import Calculator from "./Calculator";
 
 
 export interface LabReativeInfo {
@@ -33,9 +34,9 @@ export const LabView: React.FC<LabViewProps> = (overviewProps: LabViewProps) => 
         if(context.userSettings.userName==="")//local environment
         {
 
-           return  [{ EntityCollectionName: "Activities", TotalCount: 36 }, 
-                    { EntityCollectionName: "Cases", TotalCount: 9},
-                    { EntityCollectionName: "Opportunities", TotalCount: 12 }];
+           return  [{ EntityCollectionName: "Activities", TotalCount: 24 }, 
+                    { EntityCollectionName: "Cases", TotalCount: 32},
+                    { EntityCollectionName: "Opportunities", TotalCount: 40 }];
         }
 
 
@@ -87,8 +88,12 @@ export const LabView: React.FC<LabViewProps> = (overviewProps: LabViewProps) => 
 
 return (
     <div className= {"overviewCont"}>
-    {relatedRecordsInfo}
+    {relatedRecordsInfo}    
+    <div>
+        <Calculator />
     </div>
+    </div>
+
     ); 
 }
 

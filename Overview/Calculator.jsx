@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Calculator.css';
-import KeyPadComponent from "./KeyPadComponent";
-import ResultComponent from "./ResultComponent";
+import KeyPadComponent from "./CalcComponent/KeyPadComponent";
+import ResultComponent from "./CalcComponent/ResultComponent";
+//import "./CalcComponent/Calculator.css";
 class Calculator extends Component {
     constructor(){
         super();

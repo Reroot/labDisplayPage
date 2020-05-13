@@ -4,5 +4,6 @@
         "jsx": "react",
         "jsxFactory": "React.createElement",
         "typeRoots": ["node_modules/@types"],
+        "noImplicitAny": false
     }
 }
