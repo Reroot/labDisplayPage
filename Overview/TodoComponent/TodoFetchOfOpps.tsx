@@ -37,43 +37,33 @@ class ComponentName extends React.Component {
     public render(): JSX.Element {
 
             const fetchOpportunities = (blob) => {
-                var req = new XMLHttpRequest();
-                //Insert API key & GET
-                req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v9.1/opportunities(0d90be2d-1c67-463e-ac47-0d654fa42706)?$select=_accountid_value,_createdby_value,name,_owningteam_value,statuscode", false);
-                req.setRequestHeader("OData-MaxVersion", "4.0");
-                req.setRequestHeader("OData-Version", "4.0");
-                req.setRequestHeader("Accept", "application/json");
-                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-                req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
-                req.onreadystatechange = function() {
-                    if (this.readyState === 4) {
-                        req.onreadystatechange = null;
-                        if (this.status === 200) {
-                            var result = JSON.parse(this.response);
-                            blob = result;
-                            var _accountid_value = result["_accountid_value"];
-                            var _accountid_value_formatted = result["_accountid_value@OData.Community.Display.V1.FormattedValue"];
-                            var _accountid_value_lookuplogicalname = result["_accountid_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
-                            var _createdby_value = result["_createdby_value"];
-                            var _createdby_value_formatted = result["_createdby_value@OData.Community.Display.V1.FormattedValue"];
-                            var _createdby_value_lookuplogicalname = result["_createdby_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
-                            var name = result["name"];
-                            var _owningteam_value = result["_owningteam_value"];
-                            var _owningteam_value_formatted = result["_owningteam_value@OData.Community.Display.V1.FormattedValue"];
-                            var _owningteam_value_lookuplogicalname = result["_owningteam_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
-                            var statuscode = result["statuscode"];
-                        } else {
-                            Xrm.Utility.alertDialog;
+                Xrm.WebApi.online.retrieveMultipleRecords("opportunity", "?$select=_accountid_value,_createdby_value,name,_owningteam_value,statuscode&$top=400").then(
+                    function success(results) {
+                        blob = results;
+                        for (let i = 0; i < results.entities.length; i++) {
+                            let _accountid_value = results.entities[i]["_accountid_value"];
+                            let _accountid_value_formatted = results.entities[i]["_accountid_value@OData.Community.Display.V1.FormattedValue"];
+                            let _accountid_value_lookuplogicalname = results.entities[i]["_accountid_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
+                            let _createdby_value = results.entities[i]["_createdby_value"];
+                            let _createdby_value_formatted = results.entities[i]["_createdby_value@OData.Community.Display.V1.FormattedValue"];
+                            let _createdby_value_lookuplogicalname = results.entities[i]["_createdby_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
+                            let name = results.entities[i]["name"];
+                            let _owningteam_value = results.entities[i]["_owningteam_value"];
+                            let _owningteam_value_formatted = results.entities[i]["_owningteam_value@OData.Community.Display.V1.FormattedValue"];
+                            let _owningteam_value_lookuplogicalname = results.entities[i]["_owningteam_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
+                            let statuscode = results.entities[i]["statuscode"];
                         }
+                    },
+                    function(error) {
+                        Xrm.Utility.alertDialog;
                     }
-                };
-                req.send();
+                );
                 return blob;
               }
 
 
         console.log(blob.entities[1]["name"]);
-        return (<span></span>);
+        return (<span>blob.entities[1]["name"]</span>);
     }
     }
 

@@ -15,7 +15,42 @@ export interface LabViewProps {
 
 
 export const LabView: React.FC<LabViewProps> = (overviewProps: LabViewProps) => {
-
+    const fetchOpportunities = (blob) => {
+        var req = new XMLHttpRequest();
+        req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v9.1/opportunities?$select=_accountid_value,_createdby_value,name,_owningteam_value,statuscode", false);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.setRequestHeader("Prefer", "odata.include-annotations=\"*\",odata.maxpagesize=400");
+        req.setRequestHeader("Authorization", "Bearer " + "0d90be2d-1c67-463e-ac47-0d654fa42706"); //Replace token with your token value
+        req.onreadystatechange = function() {
+            if (this.readyState === 4) {
+                req.onreadystatechange = null;
+                if (this.status === 200) {
+                    var results = JSON.parse(this.response);
+                    blob = results;
+                    for (var i = 0; i < results.value.length; i++) {
+                        var _accountid_value = results.value[i]["_accountid_value"];
+                        var _accountid_value_formatted = results.value[i]["_accountid_value@OData.Community.Display.V1.FormattedValue"];
+                        var _accountid_value_lookuplogicalname = results.value[i]["_accountid_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
+                        var _createdby_value = results.value[i]["_createdby_value"];
+                        var _createdby_value_formatted = results.value[i]["_createdby_value@OData.Community.Display.V1.FormattedValue"];
+                        var _createdby_value_lookuplogicalname = results.value[i]["_createdby_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
+                        var name = results.value[i]["name"];
+                        var _owningteam_value = results.value[i]["_owningteam_value"];
+                        var _owningteam_value_formatted = results.value[i]["_owningteam_value@OData.Community.Display.V1.FormattedValue"];
+                        var _owningteam_value_lookuplogicalname = results.value[i]["_owningteam_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
+                        var statuscode = results.value[i]["statuscode"];
+                    }
+                } else {
+                    Xrm.Utility.alertDialog;
+                }
+            }
+        };
+        req.send();
+        return blob;
+      }
     const [relatedRecords, setRelatedRecords] = React.useState(Array<LabReativeInfo
     >());
 
@@ -91,7 +126,8 @@ return (
     {relatedRecordsInfo}    
     <div>
         <Calculator />
-        {/* <TodoFetchOfOpps /> */}
+        console.log(blob);
+        {/* <TodoFetchOfOpps />  */}
     </div>
     </div>
 
