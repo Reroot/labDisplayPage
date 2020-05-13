@@ -1,0 +1,31 @@
+.overviewCont{
+    height:100px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.overviewItem{
+    color: #666;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+    padding: 10px;
+    margin: 0px 5px;
+    max-width: 100px;
+    cursor: pointer;
+    background-color: #5f61d6;
+    color: rgb(141, 134, 29);
+}
+
+.itemTitle{
+   color: rgb(219, 216, 17);
+   text-align: center;
+   font-weight:600;
+}
+
+
+.itemSubtitle{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
