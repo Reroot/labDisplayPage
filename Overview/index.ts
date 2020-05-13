@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import { LabView, LabViewProps, LabReativeInfo } from './LabView';
-import Calculator from "./Calculator";
 
 export class Overview implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 

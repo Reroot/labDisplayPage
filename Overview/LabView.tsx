@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import Calculator from "./Calculator";
-
+import TodoFetchOfOpps from "./TodoComponent/TodoFetchOfOpps";
 
 export interface LabReativeInfo {
     EntityCollectionName: string;
@@ -91,6 +91,7 @@ return (
     {relatedRecordsInfo}    
     <div>
         <Calculator />
+        {/* <TodoFetchOfOpps /> */}
     </div>
     </div>
 
